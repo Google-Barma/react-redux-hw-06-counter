@@ -4,7 +4,7 @@ import Value from './Value';
 import Controls from './Controls';
 import * as actions from '../redux/actions';
 
-function Counter({ step, value, onIncrement, onDecrement }) {
+function Counter({ step, onChangeStep, value, onIncrement, onDecrement }) {
   return (
     <div
       style={{
@@ -14,7 +14,7 @@ function Counter({ step, value, onIncrement, onDecrement }) {
         padding: '100px',
       }}
     >
-      <StepInput />
+      <StepInput stepValue={step} onChangeStep={onChangeStep} />
       <Value value={value} />
       <Controls
         onIncrement={onIncrement}
@@ -25,18 +25,15 @@ function Counter({ step, value, onIncrement, onDecrement }) {
   );
 }
 
-const mapStateToProps = state => {
-  return {
-    value: state.counter.value,
-    step: state.counter.step,
-  };
-};
+const mapStateToProps = state => ({
+  value: state.counter.value,
+  step: state.counter.step,
+});
 
-const mapDispatchToProps = dispatch => {
-  return {
-    onIncrement: value => dispatch(actions.increment(value)),
-    onDecrement: value => dispatch(actions.decrement(value)),
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  onIncrement: value => dispatch(actions.increment(value)),
+  onDecrement: value => dispatch(actions.decrement(value)),
+  onChangeStep: value => dispatch(actions.step(value)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Counter);

@@ -1,7 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-export default function StepInput() {
+export default function StepInput({ stepValue, onChangeStep }) {
   const [step, setStep] = useState(5);
+
+  useEffect(() => {
+    onChangeStep(step);
+  }, [onChangeStep, step]);
 
   return (
     <input

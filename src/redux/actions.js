@@ -1,9 +1,14 @@
-export const increment = value => ({
+export const increment = increment => ({
   type: 'counter/Increment',
-  payload: value,
+  payload: { increment },
 });
 
-export const decrement = value => ({
+export const decrement = decrement => ({
   type: 'counter/Decrement',
-  payload: value,
+  payload: { decrement },
+});
+
+export const step = stepValue => ({
+  type: 'counter/Step',
+  payload: { stepValue },
 });
